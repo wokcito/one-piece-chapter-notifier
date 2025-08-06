@@ -7,7 +7,7 @@ export function updateChats(chats: string[]) {
 
 	envContent = envContent.replace(
 		/TELEGRAM_CHATS=.*/,
-		`TELEGRAM_CHATS=${chats.length === 0 ? chats[0] : chats.join(",")}`,
+		`TELEGRAM_CHATS=${chats.join(",")}`,
 	);
 
 	fs.writeFileSync(envPath, envContent);
