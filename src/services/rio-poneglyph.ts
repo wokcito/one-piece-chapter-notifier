@@ -1,11 +1,19 @@
 import puppeteer from "puppeteer";
-import { RIO_PONEGLYPH_URL } from "../helpers";
+import {
+	DEFAULT_PUPPETEER_ARGS,
+	PRODUCTION_PUPPETEER_ARGS,
+	RIO_PONEGLYPH_URL,
+} from "../helpers";
 
 export class RioPoneglyphService {
 	constructor() {}
 
 	public async isLastChapter(chapter: number): Promise<boolean> {
-		const browser = await puppeteer.launch({ headless: true });
+		const args =
+			process.env.NODE_ENV === "production"
+				? { ...DEFAULT_PUPPETEER_ARGS, ...PRODUCTION_PUPPETEER_ARGS }
+				: DEFAULT_PUPPETEER_ARGS;
+		const browser = await puppeteer.launch(args);
 		const page = await browser.newPage();
 
 		const URL = RIO_PONEGLYPH_URL(chapter);

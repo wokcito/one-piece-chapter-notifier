@@ -1,0 +1,8 @@
+services:
+    bot:
+        image: one-piece-chapter-notifier
+        environment:
+            NODE_ENV: production
+        volumes:
+            - ./database:/app/database
+        env_file: ".env"

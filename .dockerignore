@@ -1,0 +1,9 @@
+dist
+node_modules
+database
+.env*
+.gitignore
+.dockerignore
+tsconfig.json
+docker-compose.yml
+README.md

@@ -9,6 +9,13 @@ export const RIO_PONEGLYPH_URL = (chapter: number) => {
 	return `https://onepiece-fans2.net/manga/es/rioponeglyph-scan/${chapter}`;
 };
 
+export const PRODUCTION_PUPPETEER_ARGS = {
+	executablePath: "/usr/bin/chromium-browser",
+	args: ["--no-sandbox"],
+};
+
+export const DEFAULT_PUPPETEER_ARGS = { headless: true };
+
 export const DATABASE_TABLES = [
 	`
 	CREATE TABLE IF NOT EXISTS "chat" (
