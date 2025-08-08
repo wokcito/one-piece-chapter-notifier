@@ -1,7 +1,7 @@
 import puppeteer from "puppeteer";
 import { RIO_PONEGLYPH_URL } from "../helpers";
 
-export class RioPoneglyph {
+export class RioPoneglyphService {
 	constructor() {}
 
 	public async isLastChapter(chapter: number): Promise<boolean> {

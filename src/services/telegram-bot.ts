@@ -1,7 +1,7 @@
 import { Context, Telegraf } from "telegraf";
 import { ADDED_NEW_CHAT_MESSAGE, Database } from "../helpers";
 
-export class Bot {
+export class BotService {
 	private telegraf: Telegraf = null;
 	private chatsId: Set<string> = new Set();
 
