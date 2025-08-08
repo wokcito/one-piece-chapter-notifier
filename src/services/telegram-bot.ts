@@ -26,6 +26,8 @@ export class Bot {
 	}
 
 	private addChat(chatId: string) {
+		if (this.chatsId.has(chatId)) return;
+
 		Database.instance
 			.prepare(
 				`INSERT INTO chat
@@ -39,20 +41,22 @@ export class Bot {
 	}
 
 	private start(ctx: Context) {
-		const chat = ctx.message.chat.id.toString();
+		const chatId = ctx.message.chat.id.toString();
 
-		if (!this.chatsId.has(chat)) {
-			this.addChat(chat);
-			this.sendMessage(chat, ADDED_NEW_CHAT_MESSAGE);
+		if (!this.chatsId.has(chatId)) {
+			this.addChat(chatId);
+			this.sendMessage(chatId, ADDED_NEW_CHAT_MESSAGE);
 		}
 	}
 
 	private loadChats(): void {
 		const chatsId = Database.instance
-			.prepare<unknown[], string>("SELECT chat_id FROM chat")
+			.prepare<unknown[], { chat_id: string }>("SELECT chat_id FROM chat")
 			.all();
 
 		this.chatsId.clear();
-		chatsId.forEach((chatId) => this.chatsId.add(chatId));
+		chatsId
+			.map((chatId) => chatId.chat_id)
+			.forEach((chatId) => this.chatsId.add(chatId));
 	}
 }
