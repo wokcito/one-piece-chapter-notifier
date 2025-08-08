@@ -33,7 +33,7 @@ export class Bot {
 				`INSERT INTO chat
 					(chat_id, creation_date)
 				VALUES
-					(${chatId}, (SELECT datetime('now')))`,
+					(${chatId}, (SELECT datetime('now')));`,
 			)
 			.run();
 
@@ -51,7 +51,10 @@ export class Bot {
 
 	private loadChats(): void {
 		const chatsId = Database.instance
-			.prepare<unknown[], { chat_id: string }>("SELECT chat_id FROM chat")
+			.prepare<
+				unknown[],
+				{ chat_id: string }
+			>("SELECT chat_id FROM chat;")
 			.all();
 
 		this.chatsId.clear();

@@ -24,7 +24,9 @@ async function main() {
 			chapterService.setChapterAsUploaded(NEW_CHAPTER);
 			bot.sendMessages(NEW_CHAPTER_MESSAGE(NEW_CHAPTER));
 		}
-	} catch (error) {}
+	} catch (error) {
+		console.log(error);
+	}
 }
 
 CronJob.from({

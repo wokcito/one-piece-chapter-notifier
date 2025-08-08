@@ -9,7 +9,7 @@ export class ChatperService {
 				`INSERT INTO uploaded_chapter
 					(chapter_number, creation_date)
 				VALUES
-					(${chapter}, (SELECT datetime('now')))`,
+					(${chapter}, (SELECT datetime('now')));`,
 			)
 			.run();
 	}
@@ -18,8 +18,8 @@ export class ChatperService {
 		return Database.instance
 			.prepare<
 				unknown[],
-				{ chapter_number: number }
-			>("COALESCE((SELECT MAX(chapter_number) FROM uploaded_chapter), 0)")
-			.get()?.chapter_number;
+				{ last_chapter: number }
+			>("SELECT MAX(chapter_number) AS last_chapter FROM uploaded_chapter;")
+			.get()?.last_chapter;
 	}
 }
