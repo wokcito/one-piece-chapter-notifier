@@ -8,3 +8,21 @@ export const NEW_CHAPTER_MESSAGE = (chapter: number) => {
 export const RIO_PONEGLYPH_URL = (chapter: number) => {
 	return `https://onepiece-fans2.net/manga/es/rioponeglyph-scan/${chapter}`;
 };
+
+export const DATABASE_TABLES = [
+	`
+	CREATE TABLE IF NOT EXISTS "chat" (
+		"id" INTEGER NOT NULL UNIQUE,
+		"chat_id" TEXT NOT NULL UNIQUE,
+		"creation_date" DATE NOT NULL,
+		PRIMARY KEY("id")
+	);`,
+	`
+	CREATE TABLE IF NOT EXISTS "uploaded_chapter" (
+		"id" INTEGER NOT NULL UNIQUE,
+		"chapter_number" INTEGER NOT NULL UNIQUE,
+		"creation_date" DATE NOT NULL,
+		PRIMARY KEY("id")
+	);
+	`,
+];

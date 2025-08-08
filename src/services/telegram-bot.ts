@@ -1,14 +1,12 @@
 import { Context, Telegraf } from "telegraf";
-import { updateChats, ADDED_NEW_CHAT_MESSAGE } from "../helpers";
+import { ADDED_NEW_CHAT_MESSAGE, Database } from "../helpers";
 
 export class Bot {
 	private telegraf: Telegraf = null;
-	private chats: Set<string> = new Set();
+	private chatsId: Set<string> = new Set();
 
-	constructor(token: string, chats: string[]) {
-		for (const chat of chats) {
-			if (chat.length > 0) this.addChat(chat);
-		}
+	constructor(token: string) {
+		this.loadChats();
 
 		this.telegraf = new Telegraf(token);
 		this.telegraf.launch();
@@ -18,26 +16,43 @@ export class Bot {
 	}
 
 	public sendMessages(message: string) {
-		for (const chat of this.chats) {
-			this.sendMessage(chat, message);
+		for (const chatId of this.chatsId) {
+			this.sendMessage(chatId, message);
 		}
 	}
 
-	public sendMessage(chat: string, message: string) {
-		this.telegraf.telegram.sendMessage(chat, message);
+	public sendMessage(chatId: string, message: string) {
+		this.telegraf.telegram.sendMessage(chatId, message);
 	}
 
-	private addChat(chat: string) {
-		this.chats.add(chat);
-		updateChats(Array.from(this.chats));
+	private addChat(chatId: string) {
+		Database.instance
+			.prepare(
+				`INSERT INTO chat
+					(chat_id, creation_date)
+				VALUES
+					(${chatId}, (SELECT datetime('now')))`,
+			)
+			.run();
+
+		this.loadChats();
 	}
 
 	private start(ctx: Context) {
 		const chat = ctx.message.chat.id.toString();
 
-		if (!this.chats.has(chat)) {
+		if (!this.chatsId.has(chat)) {
 			this.addChat(chat);
 			this.sendMessage(chat, ADDED_NEW_CHAT_MESSAGE);
 		}
+	}
+
+	private loadChats(): void {
+		const chatsId = Database.instance
+			.prepare<unknown[], string>("SELECT chat_id FROM chat")
+			.all();
+
+		this.chatsId.clear();
+		chatsId.forEach((chatId) => this.chatsId.add(chatId));
 	}
 }
