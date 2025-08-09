@@ -7,7 +7,6 @@ dotenv.config();
 
 const CRON_SCHEDULE = process.env.CRON_SCHEDULE;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
-const TELEGRAM_ADMIN_CHAT = process.env.TELEGRAM_ADMIN_CHAT;
 
 const botService = new BotService(TELEGRAM_BOT_TOKEN);
 const rioPoneglyphService = new RioPoneglyphService();

@@ -6,6 +6,5 @@ Telegram's bot that notifies when a chapter of One Piece translated by Rio Poneg
 
 ```env
 TELEGRAM_BOT_TOKEN=
-TELEGRAM_ADMIN_CHAT=
 CRON_SCHEDULE="0 0 * * * 4,5"
 ```
