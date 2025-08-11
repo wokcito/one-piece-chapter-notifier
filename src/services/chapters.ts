@@ -9,7 +9,7 @@ export class ChatperService {
 				`INSERT INTO uploaded_chapter
 					(chapter_number, creation_date)
 				VALUES
-					(${chapter}, (SELECT datetime('now')));`,
+					(${chapter}, (SELECT datetime('now', '-3 hours')));`,
 			)
 			.run();
 	}

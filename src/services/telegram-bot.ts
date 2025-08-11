@@ -34,7 +34,7 @@ export class BotService {
 				`INSERT INTO chat
 					(chat_id, creation_date)
 				VALUES
-					(${chatId}, (SELECT datetime('now')));`,
+					(${chatId}, (SELECT datetime('now', '-3 hours')));`,
 			)
 			.run();
 
