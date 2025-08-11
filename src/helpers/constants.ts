@@ -1,11 +1,16 @@
 import { getVersion } from "./get-version";
 
-export const ADDED_NEW_CHAT_MESSAGE =
-	"Agregado correctamente, a partir de ahora recibirás una notificación cuando salga un nuevo capítulo.";
+export const START_MESSAGE = `
+	Agregado correctamente. A partir de ahora recibirás una notificación cuando salga un nuevo capítulo.
+	\n
+	\nComandos disponibles:
+	\n- /start
+	\n- /help`;
 
-export const NEW_CHAPTER_MESSAGE = (chapter: number) => {
-	return `Salió el capítulo ${chapter}\n\n${RIO_PONEGLYPH_URL(chapter)}`;
-};
+export const NEW_CHAPTER_MESSAGE = (chapter: number) =>
+	`Salió el capítulo ${chapter}
+	\n
+	\n${RIO_PONEGLYPH_URL(chapter)}`;
 
 export const HELP_MESSAGE = `Bot version: ${getVersion()}`;
 

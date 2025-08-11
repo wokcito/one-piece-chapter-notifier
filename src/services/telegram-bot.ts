@@ -1,5 +1,5 @@
 import { Context, Telegraf } from "telegraf";
-import { ADDED_NEW_CHAT_MESSAGE, Database, HELP_MESSAGE } from "../helpers";
+import { START_MESSAGE, HELP_MESSAGE, Database } from "../helpers";
 
 export class BotService {
 	private telegraf: Telegraf = null;
@@ -60,7 +60,7 @@ export class BotService {
 
 		if (!this.chatsId.has(chatId)) {
 			this.addChat(chatId);
-			this.sendMessage(chatId, ADDED_NEW_CHAT_MESSAGE);
+			this.sendMessage(chatId, START_MESSAGE);
 		}
 	}
 
