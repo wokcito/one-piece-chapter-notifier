@@ -1,6 +1,6 @@
 # One Piece Chapter Notifier
 
-Telegram's bot that notifies when a chapter of One Piece translated by Rio Poneglyph is uploaded.
+Telegram's bot that notifies when a chapter of One Piece translated by Rio Poneglyph has been released.
 
 ## Environment variables
 
