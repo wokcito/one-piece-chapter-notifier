@@ -14,15 +14,17 @@ const chapterService = new ChatperService();
 
 async function main() {
 	try {
-		const LAST_CHAPTER = chapterService.getLastChapter();
-		const isLastChapter =
-			await rioPoneglyphService.isLastChapter(LAST_CHAPTER);
+		if (!chapterService.isTheChapterAlreadyReleased()) {
+			const LAST_CHAPTER = chapterService.getLastChapter();
+			const isLastChapter =
+				await rioPoneglyphService.isLastChapter(LAST_CHAPTER);
 
-		if (!isLastChapter) {
-			const NEW_CHAPTER = LAST_CHAPTER + 1;
+			if (!isLastChapter) {
+				const NEW_CHAPTER = LAST_CHAPTER + 1;
 
-			chapterService.setChapterAsUploaded(NEW_CHAPTER);
-			botService.sendMessages(NEW_CHAPTER_MESSAGE(NEW_CHAPTER));
+				chapterService.setChapterAsUploaded(NEW_CHAPTER);
+				botService.sendMessages(NEW_CHAPTER_MESSAGE(NEW_CHAPTER));
+			}
 		}
 	} catch (error) {
 		console.log(error);

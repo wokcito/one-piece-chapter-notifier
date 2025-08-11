@@ -18,6 +18,8 @@ export const RIO_PONEGLYPH_URL = (chapter: number) => {
 	return `https://onepiece-fans2.net/manga/es/rioponeglyph-scan/${chapter}`;
 };
 
+export const NO_CHAPTER_RELEASED_THIS_WEEK = 0;
+
 export const PRODUCTION_PUPPETEER_ARGS = {
 	executablePath: "/usr/bin/chromium-browser",
 	args: ["--no-sandbox"],
