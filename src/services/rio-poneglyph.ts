@@ -27,6 +27,8 @@ export class RioPoneglyphService {
 			);
 		});
 
+		await browser.close();
+
 		return !exists;
 	}
 }
