@@ -1,4 +1,3 @@
-import fs from "node:fs";
 import path from "node:path";
 import sqlite from "better-sqlite3";
 import { DATABASE_TABLES } from "./constants";
