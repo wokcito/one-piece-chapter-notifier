@@ -4,12 +4,15 @@ import { START_MESSAGE, HELP_MESSAGE, Database } from "../helpers";
 export class BotService {
 	private telegraf: Telegraf = null;
 	private chatsId: Set<string> = new Set();
+	private adminChatId: string;
 
-	constructor(token: string) {
+	constructor(token: string, adminChatId: string) {
 		this.loadChats();
 
 		this.telegraf = new Telegraf(token);
 		this.telegraf.launch();
+
+		this.adminChatId = adminChatId;
 
 		// handlers
 		this.telegraf.start((ctx) => this.start(ctx));
@@ -60,7 +63,12 @@ export class BotService {
 
 		if (!this.chatsId.has(chatId)) {
 			this.addChat(chatId);
+
 			this.sendMessage(chatId, START_MESSAGE);
+			this.sendMessage(
+				this.adminChatId,
+				`The bot has one more subscriber!`,
+			);
 		}
 	}
 
