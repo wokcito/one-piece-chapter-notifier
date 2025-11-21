@@ -14,21 +14,24 @@ export class RioPoneglyphService {
 				? { ...DEFAULT_PUPPETEER_ARGS, ...PRODUCTION_PUPPETEER_ARGS }
 				: DEFAULT_PUPPETEER_ARGS;
 		const browser = await puppeteer.launch(args);
-		const page = await browser.newPage();
 
-		const URL = RIO_PONEGLYPH_URL(chapter);
-		await page.goto(URL, { waitUntil: "networkidle2" });
+		try {
+			const page = await browser.newPage();
 
-		const exists = await page.evaluate(() => {
-			const spans = Array.from(document.querySelectorAll("span"));
+			const URL = RIO_PONEGLYPH_URL(chapter);
+			await page.goto(URL, { waitUntil: "networkidle2" });
 
-			return spans.some(
-				(span) => span.textContent.trim() === "Siguiente capítulo",
-			);
-		});
+			const exists = await page.evaluate(() => {
+				const spans = Array.from(document.querySelectorAll("span"));
 
-		await browser.close();
+				return spans.some(
+					(span) => span.textContent.trim() === "Siguiente capítulo",
+				);
+			});
 
-		return !exists;
+			return !exists;
+		} finally {
+			await browser.close();
+		}
 	}
 }
