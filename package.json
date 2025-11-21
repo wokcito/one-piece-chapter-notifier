@@ -11,14 +11,14 @@
 	"author": "Maximiliano Kazanski",
 	"devDependencies": {
 		"@types/better-sqlite3": "7.6.13",
-		"@types/node": "24.2.0",
-		"typescript": "5.9.2"
+		"@types/node": "24.10.1",
+		"typescript": "5.9.3"
 	},
 	"dependencies": {
-		"better-sqlite3": "12.2.0",
-		"cron": "4.3.3",
-		"dotenv": "17.2.1",
-		"puppeteer": "24.15.0",
+		"better-sqlite3": "12.4.5",
+		"cron": "4.3.4",
+		"dotenv": "17.2.3",
+		"puppeteer": "24.31.0",
 		"telegraf": "4.16.3"
 	}
 }
