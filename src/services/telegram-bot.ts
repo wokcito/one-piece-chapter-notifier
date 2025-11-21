@@ -26,7 +26,11 @@ export class BotService {
 	}
 
 	public sendMessage(chatId: string, message: string) {
-		this.telegraf.telegram.sendMessage(chatId, message);
+		try {
+			this.telegraf.telegram.sendMessage(chatId, message);
+		} catch (error) {
+			console.error(`Failed to send message to chat ${chatId}:`, error);
+		}
 	}
 
 	private addChat(chatId: string) {
