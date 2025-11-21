@@ -7,3 +7,4 @@ database
 docker-compose.yml
 README.md
 scripts
+*.tar
