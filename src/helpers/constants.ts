@@ -11,7 +11,7 @@ export const NEW_CHAPTER_MESSAGE = (chapter: number) =>
 export const HELP_MESSAGE = `Bot version: ${getVersion()}`;
 
 export const RIO_PONEGLYPH_URL = (chapter: number) => {
-	return `https://onepiece-fans2.net/manga/es/rioponeglyph-scan/${chapter}`;
+	return `${process.env.MANGA_BASE_URL}/manga/es/rioponeglyph-scan/${chapter}`;
 };
 
 export const NO_CHAPTER_RELEASED_THIS_WEEK = 0;

@@ -8,6 +8,11 @@ dotenv.config();
 const CRON_SCHEDULE = process.env.CRON_SCHEDULE;
 const TELEGRAM_BOT_TOKEN = process.env.TELEGRAM_BOT_TOKEN;
 const TELEGRAM_ADMIN_CHAT_ID = process.env.TELEGRAM_ADMIN_CHAT_ID;
+const MANGA_BASE_URL = process.env.MANGA_BASE_URL;
+
+if (!MANGA_BASE_URL) {
+	throw new Error("MANGA_BASE_URL environment variable is required");
+}
 
 const botService = new BotService(TELEGRAM_BOT_TOKEN, TELEGRAM_ADMIN_CHAT_ID);
 const rioPoneglyphService = new RioPoneglyphService();
